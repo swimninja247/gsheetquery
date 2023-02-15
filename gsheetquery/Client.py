@@ -6,14 +6,16 @@ from .Database import SPREADSHEET_FILENAME_PREFIX, Database
 """
 The client represents the main object that users will interact with
 """
-class Client:
 
+
+class Client:
     def __init__(self) -> None:
         self._gs = gspread.oauth()
 
     """
     Gets spreadsheet file associated with database.
     """
+
     def get_database(self, name):
         full_name = SPREADSHEET_FILENAME_PREFIX + name
         try:
@@ -29,6 +31,7 @@ class Client:
     """
     Creates a spreadsheet file with the given @name.
     """
+
     def create_database(self, name):
         full_name = SPREADSHEET_FILENAME_PREFIX + name
         # First see if a spreadsheet with this name already exists
@@ -40,14 +43,8 @@ class Client:
     """
     Returns a list of databases in the user's Drive
     """
+
     def list_databases(self):
         files = self._gs.list_spreadsheet_files()
-        database_filenames = [
-            file.title for file in files if file.title.startswith(
-                SPREADSHEET_FILENAME_PREFIX
-            )
-        ]
+        database_filenames = [file.title for file in files if file.title.startswith(SPREADSHEET_FILENAME_PREFIX)]
         return database_filenames
-
-
-
