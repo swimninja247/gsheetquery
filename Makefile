@@ -1,6 +1,6 @@
 SRC = gsheetquery
 SETUP = setup.py
-TESTS = tests
+TESTS = gsheetquery/tests
 
 #########
 # BUILD #
