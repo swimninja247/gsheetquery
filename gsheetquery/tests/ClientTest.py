@@ -7,7 +7,6 @@ from gsheetquery import SPREADSHEET_FILENAME_PREFIX
 
 
 class TestClient(unittest.TestCase):
-
     @patch.object(gspread, 'oauth')
     def setUp(self, mock_oauth):
         self.client = Client()

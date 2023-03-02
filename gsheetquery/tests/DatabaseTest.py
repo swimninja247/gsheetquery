@@ -14,7 +14,7 @@ class TestDatabase(unittest.TestCase):
 
     def test_get_name(self):
         self.mock_spreadsheet.title = SPREADSHEET_FILENAME_PREFIX + "test_database"
-        
+
         # Act and Assert
         self.assertEqual(self.database.get_name(), "test_database")
 
