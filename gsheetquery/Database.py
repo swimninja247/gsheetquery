@@ -25,7 +25,7 @@ class Database:
     """
 
     def list_tables(self):
-        return self.spreadsheet.worksheets()
+        return [w.title for w in self.spreadsheet.worksheets()]
 
     """
     Create a table with @name
@@ -35,7 +35,7 @@ class Database:
         try:
             self.spreadsheet.worksheet(name)
         except WorksheetNotFound:
-            self.spreadsheet.add_worksheet(title=name)
+            self.spreadsheet.add_worksheet(name, 10, 10)
 
     """
     Deletes a table with @name

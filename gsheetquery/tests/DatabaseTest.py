@@ -19,11 +19,11 @@ class TestDatabase(unittest.TestCase):
         self.assertEqual(self.database.get_name(), "test_database")
 
     def test_list_tables(self):
-        mock_worksheets = [MagicMock(spec=Worksheet), MagicMock(spec=Worksheet)]
+        mock_worksheets = [MagicMock(spec=Worksheet, title='1'), MagicMock(spec=Worksheet, title='2')]
         self.mock_spreadsheet.worksheets.return_value = mock_worksheets
 
         # Act and assert
-        self.assertEqual(self.database.list_tables(), mock_worksheets)
+        self.assertEqual(self.database.list_tables(), ['1', '2'])
 
     def test_add_table_exists(self):
         existing_table = 'existing_table'
@@ -37,7 +37,7 @@ class TestDatabase(unittest.TestCase):
 
         # Act and assert
         self.assertEqual(self.database.add_table("new_table"), None)
-        self.mock_spreadsheet.add_worksheet.assert_called_once_with(title="new_table")
+        self.mock_spreadsheet.add_worksheet.assert_called_once_with("new_table", 10, 10)
 
     def test_drop_table_exists(self):
         mock_worksheet = MagicMock(spec=Worksheet)

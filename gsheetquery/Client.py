@@ -36,10 +36,21 @@ class Client:
     def create_database(self, name):
         full_name = SPREADSHEET_FILENAME_PREFIX + name
         # First see if a spreadsheet with this name already exists
-        files = self._gs.list_spreadsheet_files(title=full_name)
-        if files:
-            return Database(files[0])
-        return Database(self._gs.create(title=full_name))
+        try:
+            spreadsheet = self._gs.open(full_name)
+            return Database(spreadsheet)
+        
+        except SpreadsheetNotFound:
+            return Database(self._gs.create(title=full_name))
+
+    def del_database(self, name):
+        full_name = SPREADSHEET_FILENAME_PREFIX + name
+        try:
+            id = self._gs.open(full_name).id
+        except SpreadsheetNotFound:
+            return
+
+        self._gs.del_spreadsheet(id)
 
     """
     Returns a list of databases in the user's Drive
@@ -47,5 +58,5 @@ class Client:
 
     def list_databases(self):
         files = self._gs.list_spreadsheet_files()
-        database_filenames = [file.title for file in files if file.title.startswith(SPREADSHEET_FILENAME_PREFIX)]
+        database_filenames = [file['name'] for file in files if file['name'].startswith(SPREADSHEET_FILENAME_PREFIX)]
         return database_filenames

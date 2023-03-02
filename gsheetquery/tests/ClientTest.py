@@ -40,7 +40,7 @@ class TestClient(unittest.TestCase):
         # Arrange
         name = 'existing_database'
         existing_spreadsheet = MagicMock()
-        self.mock_gs.list_spreadsheet_files.return_value = [existing_spreadsheet]
+        self.mock_gs.open.return_value = existing_spreadsheet
 
         # Act
         result = self.client.create_database(name)
@@ -48,26 +48,27 @@ class TestClient(unittest.TestCase):
         # Assert
         self.assertIsInstance(result, Database)
         self.assertEqual(result.spreadsheet, existing_spreadsheet)
-        self.mock_gs.list_spreadsheet_files.assert_called_once_with(title=SPREADSHEET_FILENAME_PREFIX + name)
+        self.mock_gs.open.assert_called_once_with(SPREADSHEET_FILENAME_PREFIX + name)
         self.mock_gs.create.assert_not_called()
 
     def test_create_database_creates_new_database_when_spreadsheet_does_not_exist(self):
         # Arrange
         name = 'new_database'
         self.mock_gs.list_spreadsheet_files.return_value = []
+        self.mock_gs.open.side_effect = gspread.SpreadsheetNotFound
 
         # Act
         result = self.client.create_database(name)
 
         # Assert
         self.assertIsInstance(result, Database)
-        self.mock_gs.list_spreadsheet_files.assert_called_once_with(title=SPREADSHEET_FILENAME_PREFIX + name)
+        self.mock_gs.open.assert_called_once_with(SPREADSHEET_FILENAME_PREFIX + name)
         self.mock_gs.create.assert_called_once_with(title=SPREADSHEET_FILENAME_PREFIX + name)
 
     def test_list_databases_returns_list_of_database_names(self):
         # Arrange
         titles = ['not_a_database', SPREADSHEET_FILENAME_PREFIX + 'database1']
-        mock_files = [MagicMock(title=title) for title in titles]
+        mock_files = [{'name': title} for title in titles]
         self.mock_gs.list_spreadsheet_files.return_value = mock_files
 
         # Act
