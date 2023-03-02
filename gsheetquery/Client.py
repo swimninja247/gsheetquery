@@ -39,7 +39,7 @@ class Client:
         try:
             spreadsheet = self._gs.open(full_name)
             return Database(spreadsheet)
-        
+
         except SpreadsheetNotFound:
             return Database(self._gs.create(title=full_name))
 
