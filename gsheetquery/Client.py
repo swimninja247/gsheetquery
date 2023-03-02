@@ -1,7 +1,8 @@
 import gspread
 from gspread.exceptions import SpreadsheetNotFound
 
-from .Database import SPREADSHEET_FILENAME_PREFIX, Database
+from gsheetquery import SPREADSHEET_FILENAME_PREFIX
+from gsheetquery.Database import Database
 
 """
 The client represents the main object that users will interact with
