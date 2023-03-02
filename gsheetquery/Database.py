@@ -1,14 +1,12 @@
 import csv
 from gspread.exceptions import WorksheetNotFound
+from gsheetquery import SPREADSHEET_FILENAME_PREFIX
 
 """
 A spreadsheet file will represent a database
 A sheet will represent a table
 Each row is an entry, and each column is an attribute
 """
-
-SPREADSHEET_FILENAME_PREFIX = 'GSHEETQUERY_'
-
 
 class Database:
     def __init__(self, spreadsheet) -> None:
