@@ -3,7 +3,7 @@ GSheetQuery is a python library for using Google Sheets as a database.  It provi
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-![Open Issues](https://img.shields.io/github/issues/swimninja247/youtubecommentmanager)
+![Open Issues](https://img.shields.io/github/issues/swimninja247/gsheetquery)
 
 ## Overview
 
