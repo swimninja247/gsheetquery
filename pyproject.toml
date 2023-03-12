@@ -48,6 +48,8 @@ develop = [
     "pytest-cov>=2.6.1",
     "twine",
     "wheel",
+    "gspread",
+    "pyproject-flake8",
 ]
 
 [tool.black]
