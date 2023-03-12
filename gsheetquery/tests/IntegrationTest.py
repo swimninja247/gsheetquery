@@ -1,6 +1,8 @@
 from gsheetquery.Client import Client
+import pytest
 
 
+@pytest.mark.skip(reason="need to automate google api auth")
 def test_client():
     client = Client()
 
