@@ -7,6 +7,7 @@ class Database:
     """
     A class representing a database.  This is the equivalent of a sheets file.
     """
+
     def __init__(self, spreadsheet) -> None:
         """
         Initialize the Database object.

@@ -9,6 +9,7 @@ class Client:
     """
     A class representing a client for accessing Google Sheets API.
     """
+
     def __init__(self) -> None:
         """
         Initialize the Client object.
