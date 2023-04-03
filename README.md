@@ -17,3 +17,29 @@ This library will allow users to interact with google sheets as a document datab
 
 Install using `pip install gsheetquery` in your preferred command line.  Import to your python files like any other module.
 
+## Quickstart
+
+```python
+from gsheetquery import Client, Database
+
+    # Initialize the client object
+    client = Client()
+
+    # Create a new database
+    database = client.create_database("my_new_database")
+
+    # Add a new table to the database
+    database.add_table("my_new_table")
+
+    # List the tables in the database
+    table_names = database.list_tables()
+    print("Tables in the database:", table_names)
+
+    # Export a table to a CSV file
+    table_name = "my_new_table"
+    csv_path = "my_new_table.csv"
+    database.export_table_csv(table_name, csv_path)
+
+    # Delete the database
+    client.del_database("my_new_database")
+```
