@@ -50,6 +50,9 @@ develop = [
     "wheel",
     "gspread",
     "pyproject-flake8",
+    "sphinx",
+    "sphinx_rtd_theme",
+    "recommonmark"
 ]
 
 [tool.black]
