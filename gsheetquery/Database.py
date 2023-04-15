@@ -1,6 +1,6 @@
 from gspread.exceptions import WorksheetNotFound
 from gsheetquery import SPREADSHEET_FILENAME_PREFIX
-from gsheetquery.Collection import Collection
+from gsheetquery.collection import Collection
 
 from typing import List
 
