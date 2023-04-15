@@ -2,7 +2,7 @@ import unittest
 from unittest.mock import MagicMock
 from gspread import Spreadsheet, Worksheet
 from gspread.exceptions import WorksheetNotFound
-from gsheetquery.Database import Database
+from gsheetquery.database import Database
 from gsheetquery.collection import Collection
 from gsheetquery import SPREADSHEET_FILENAME_PREFIX
 

@@ -1,4 +1,4 @@
-from gsheetquery.Client import Client
+from gsheetquery.client import Client
 import pytest
 
 
