@@ -72,7 +72,7 @@ class TestDatabase(unittest.TestCase):
     def test_get_collection(self):
         collection_mock = MagicMock(spec=Collection)
         self.database.create_collection = MagicMock(return_value=collection_mock)
-        
+
         result = self.database.get_collection('test')
 
         self.database.create_collection.assert_called_once()
@@ -81,7 +81,7 @@ class TestDatabase(unittest.TestCase):
     def test_getitem(self):
         collection_mock = MagicMock(spec=Collection)
         self.database.get_collection = MagicMock(return_value=collection_mock)
-        
+
         result = self.database['test']
 
         self.database.get_collection.assert_called_once()
