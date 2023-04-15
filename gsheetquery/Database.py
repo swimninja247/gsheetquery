@@ -1,6 +1,8 @@
-import csv
 from gspread.exceptions import WorksheetNotFound
 from gsheetquery import SPREADSHEET_FILENAME_PREFIX
+from gsheetquery.Collection import Collection
+
+from typing import List
 
 
 class Database:
@@ -24,26 +26,34 @@ class Database:
         """
         return self.spreadsheet.title[len(SPREADSHEET_FILENAME_PREFIX) :]
 
-    def list_tables(self):
+    def list_collection_names(self) -> List[str]:
         """
-        Return a list of the tables (sheets) in this database (spreadsheet).
+        Return a list of the collections (sheets) in this database (spreadsheet).
 
         :return: A list of the table names.
         """
         return [w.title for w in self.spreadsheet.worksheets()]
 
-    def add_table(self, name):
+    def get_collection(self, name: str) -> Collection:
         """
-        Create a table with @name.
+        Get a collection with @name.  If the collection does not exist, create it.
 
-        :param name: The name of the table to be created.
+        :param name: The name of the collection to get.
+        """
+        return self.create_collection(name)
+
+    def create_collection(self, name: str) -> Collection:
+        """
+        Create a collection with @name.  If the collection already exists, return the existing collection.
+
+        :param name: The name of the collection to be created.
         """
         try:
-            self.spreadsheet.worksheet(name)
+            return Collection(self.spreadsheet.worksheet(name))
         except WorksheetNotFound:
-            self.spreadsheet.add_worksheet(name, 10, 10)
+            return Collection(self.spreadsheet.add_worksheet(name, 10, 10))
 
-    def drop_table(self, name):
+    def drop_collection(self, name: str) -> None:
         """
         Deletes a table with @name.
 
@@ -55,18 +65,12 @@ class Database:
         except WorksheetNotFound:
             pass
 
-    def export_table_csv(self, name, csv_path):
+    # TODO: don't create duplicate collection objects
+    def __getitem__(self, name: str) -> Collection:
         """
-        Exports a table to a csv file.
+        Get a collection (sheet) by name from this database (spreadsheet).
 
-        :param name: The name of the table to be exported.
-        :param csv_path: The path where the csv file will be exported.
+        :param name: The name of the collection to be retrieved.
+        :return: A collection object.
         """
-        try:
-            worksheet = self.spreadsheet.worksheet(name)
-            rows = worksheet.get_all_values()
-            with open(csv_path, "w", newline="") as f:
-                writer = csv.writer(f)
-                writer.writerows(rows)
-        except WorksheetNotFound:
-            print("Worksheet not found")
+        return self.get_collection(name)
