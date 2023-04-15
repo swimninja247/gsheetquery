@@ -2,7 +2,7 @@ import gspread
 from gspread.exceptions import SpreadsheetNotFound
 
 from gsheetquery import SPREADSHEET_FILENAME_PREFIX
-from gsheetquery.Database import Database
+from gsheetquery.database import Database
 
 
 class Client:

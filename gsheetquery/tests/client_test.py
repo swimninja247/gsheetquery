@@ -1,8 +1,8 @@
 from unittest.mock import patch, MagicMock
 import unittest
 import gspread
-from gsheetquery.Client import Client
-from gsheetquery.Database import Database
+from gsheetquery.client import Client
+from gsheetquery.database import Database
 from gsheetquery import SPREADSHEET_FILENAME_PREFIX
 
 
