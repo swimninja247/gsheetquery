@@ -54,3 +54,4 @@ API Docs
 
     modules/database
     modules/client
+    modules/collection

@@ -1,6 +1,6 @@
 Client Module Documentation
 =============================
 
-.. automodule:: gsheetquery.Client
+.. automodule:: gsheetquery.client
     :members:
     
