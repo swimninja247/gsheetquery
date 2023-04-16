@@ -1,5 +1,5 @@
 Database Module Documentation
 =============================
 
-.. automodule:: gsheetquery.Database
+.. automodule:: gsheetquery.database
     :members:

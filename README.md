@@ -1,5 +1,5 @@
 # GSheetQuery
-GSheetQuery is a python library for using Google Sheets as a database.  It provides an ORM and query builder.
+GSheetQuery is a python library for using Google Sheets as a document database.  It modeled after pymongo's interface.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ![Open Issues](https://img.shields.io/github/issues/swimninja247/gsheetquery)
@@ -10,7 +10,7 @@ GSheetQuery is a python library for using Google Sheets as a database.  It provi
 
 ## Overview
 
-For small projects, full Python frameworks can be overkill (Django), especially if you want code up and running quickly.  Google Sheets can be leveraged as a database and made accessible by GSheetQuery.
+For small projects, full Python frameworks can be overkill (Django).  Especially if you want code up and running quickly.  Google Sheets can be leveraged as a database and made accessible by GSheetQuery.
 
 This library will allow users to interact with google sheets as a document database similar to MongoDB.
 
@@ -29,18 +29,17 @@ from gsheetquery import Client, Database
     # Create a new database
     database = client.create_database("my_new_database")
 
-    # Add a new table to the database
-    database.add_table("my_new_table")
+    # Add a new collection to the database
+    new_collection = database['new-collection']
 
-    # List the tables in the database
-    table_names = database.list_tables()
-    print("Tables in the database:", table_names)
+    # List the collections in the database
+    collection_names = database.list_collection_names()
+    print("Collections in the database:", collection_names)
 
-    # Export a table to a CSV file
-    table_name = "my_new_table"
-    csv_path = "my_new_table.csv"
-    database.export_table_csv(table_name, csv_path)
+    # Add a doc to the collection
+    new_doc = {"key1": "val1"}
+    new_collection.insert_one(new_doc)
 
     # Delete the database
-    client.del_database("my_new_database")
+    client.drop_collection('new-collection')
 ```
