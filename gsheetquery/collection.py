@@ -34,10 +34,11 @@ class Collection:
         rows = [utils.doc_to_row(doc) for doc in docs]
         self.worksheet.append_rows(rows)
 
-    def find_one(self, template: Dict[str, str]=None) -> Optional[Dict[str, str]]:
+    def find_one(self, template: Dict[str, str] = None) -> Optional[Dict[str, str]]:
         """
-        Returns the first document matching the given template.  The template is a subset of the values of the document.  Returns None if no matches found.
-        
+        Returns the first document matching the given template.
+        The template is a subset of the values of the document.  Returns None if no matches found.
+
         :param template: A list of mappings to strings
         """
         search_values = utils.doc_to_row(template)
@@ -47,13 +48,13 @@ class Collection:
             print(row)
             if all(val in row for val in search_values):
                 return utils.row_to_doc(row)
-            
+
         return None
-    
-    def find_many(self, template: Dict[str, str]=None, max: int=0) -> List[Dict[str, str]]:
+
+    def find_many(self, template: Dict[str, str] = None, max: int = 0) -> List[Dict[str, str]]:
         """
         Returns up to max matching documents as in find_one.
-        
+
         :param template: A list of mappings to strings
         :param max: The max number of results to return.  If 0, returns all.
         """

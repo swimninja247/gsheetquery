@@ -10,7 +10,11 @@ class CollectionTests(unittest.TestCase):
         self.worksheet = MagicMock(spec=Worksheet)
         self.collection = Collection(self.worksheet)
         self.test_doc = {'test': 'test'}
-        self.test_docs = [['"name": "Alice"', '"age": "25"', '"gender": "F"'], ['"name": "Bob"', '"age": "30"', '"gender": "M"'], ['"name": "Charlie"', '"age": "35"', '"gender": "M"']]
+        self.test_docs = [
+            ['"name": "Alice"', '"age": "25"', '"gender": "F"'],
+            ['"name": "Bob"', '"age": "30"', '"gender": "M"'],
+            ['"name": "Charlie"', '"age": "35"', '"gender": "M"'],
+        ]
         self.worksheet.get_values.return_value = self.test_docs
 
     @patch('gsheetquery.utils.doc_to_row')
@@ -50,9 +54,7 @@ class CollectionTests(unittest.TestCase):
     def test_find_many_hit_max(self):
         template = {'gender': 'M'}
         result = self.collection.find_many(template, max=1)
-        expected = [
-            {'name': 'Bob', 'age': '30', 'gender': 'M'}
-        ]
+        expected = [{'name': 'Bob', 'age': '30', 'gender': 'M'}]
         self.assertEqual(result, expected)
 
     def test_find_many_found_none(self):
@@ -65,8 +67,5 @@ class CollectionTests(unittest.TestCase):
     def test_find_many_found_all(self):
         template = {'gender': 'M'}
         result = self.collection.find_many(template)
-        expected = [
-            {'name': 'Bob', 'age': '30', 'gender': 'M'},
-            {'name': 'Charlie', 'age': '35', 'gender': 'M'}
-        ]
+        expected = [{'name': 'Bob', 'age': '30', 'gender': 'M'}, {'name': 'Charlie', 'age': '35', 'gender': 'M'}]
         self.assertEqual(result, expected)
