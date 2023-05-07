@@ -23,7 +23,7 @@ Quickstart
 
 .. code-block:: Python
 
-    from gsheetquery import Client, Database
+    from gsheetquery import Client, Collection
 
     # Initialize the client object
     client = Client()
@@ -31,20 +31,22 @@ Quickstart
     # Create a new database
     database = client.create_database("my_new_database")
 
-    # Add a new table to the database
-    database.add_table("my_new_table")
+    # Add a new collection to the database
+    new_collection = database['new-collection']
 
-    # List the tables in the database
-    table_names = database.list_tables()
-    print("Tables in the database:", table_names)
+    # List the collections in the database
+    collection_names = database.list_collection_names()
+    print("Collections in the database:", collection_names)
 
-    # Export a table to a CSV file
-    table_name = "my_new_table"
-    csv_path = "my_new_table.csv"
-    database.export_table_csv(table_name, csv_path)
+    # Add a doc to the collection
+    new_doc = {"name": "Bob", "age", "30"}
+    new_collection.insert_one(new_doc)
+
+    # Query the collection
+    new_collection.find_one({"age": "30"})
 
     # Delete the database
-    client.del_database("my_new_database")
+    client.drop_collection('new-collection')
 
 API Docs
 ========
