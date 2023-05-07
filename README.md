@@ -21,25 +21,28 @@ Install using `pip install gsheetquery` in your preferred command line.  Import 
 ## Quickstart
 
 ```python
-from gsheetquery import Client, Database
+from gsheetquery import Client, Collection
 
-    # Initialize the client object
-    client = Client()
+# Initialize the client object
+client = Client()
 
-    # Create a new database
-    database = client.create_database("my_new_database")
+# Create a new database
+database = client.create_database("my_new_database")
 
-    # Add a new collection to the database
-    new_collection = database['new-collection']
+# Add a new collection to the database
+new_collection = database['new-collection']
 
-    # List the collections in the database
-    collection_names = database.list_collection_names()
-    print("Collections in the database:", collection_names)
+# List the collections in the database
+collection_names = database.list_collection_names()
+print("Collections in the database:", collection_names)
 
-    # Add a doc to the collection
-    new_doc = {"key1": "val1"}
-    new_collection.insert_one(new_doc)
+# Add a doc to the collection
+new_doc = {"name": "Bob", "age", "30"}
+new_collection.insert_one(new_doc)
 
-    # Delete the database
-    client.drop_collection('new-collection')
+# Query the collection
+new_collection.find_one({"age": "30"})
+
+# Delete the database
+client.drop_collection('new-collection')
 ```
